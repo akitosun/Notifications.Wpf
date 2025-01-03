@@ -11,6 +11,6 @@
             <Button x:Name="Show" Content="Show" />
             <Button x:Name="ShowInWindow" Content="Show in window" />
         </UniformGrid>
-        <controls:NotificationArea x:Name="WindowArea" Position="TopLeft" MaxItems="3"/>
+        <controls:ToastContainerControl x:Name="WindowArea" Position="TopLeft" MaxItems="3"/>
     </DockPanel>
 </Window>

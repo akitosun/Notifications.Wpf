@@ -15,7 +15,7 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="controls:Notification">
+            <Style TargetType="controls:ToastControl">
                 <Style.Resources>
                     <DataTemplate DataType="{x:Type micro:PropertyChangedBase}">
                         <ContentControl cal:View.Model="{Binding}" />
@@ -23,7 +23,7 @@
                 </Style.Resources>
             </Style>
 
-            <Style TargetType="controls:NotificationArea">
+            <Style TargetType="controls:ToastContainerControl">
                 <Setter Property="MaxItems" Value="7" />
             </Style>
         </ResourceDictionary>

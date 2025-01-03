@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Notifications.Wpf
+﻿namespace Notifications.Wpf
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// Defines the <see cref="NotificationTemplateSelector" />
+    /// </summary>
     public class NotificationTemplateSelector : DataTemplateSelector
     {
+        /// <summary>
+        /// Defines the _defaultStringTemplate
+        /// </summary>
         private DataTemplate _defaultStringTemplate;
+
+        /// <summary>
+        /// Defines the _defaultNotificationTemplate
+        /// </summary>
         private DataTemplate _defaultNotificationTemplate;
 
+        /// <summary>
+        /// The GetTemplatesFromResources
+        /// </summary>
+        /// <param name="container">The container<see cref="FrameworkElement"/></param>
         private void GetTemplatesFromResources(FrameworkElement container)
         {
             _defaultStringTemplate =
@@ -21,24 +30,29 @@ namespace Notifications.Wpf
                     container?.FindResource("DefaultNotificationTemplate") as DataTemplate;
         }
 
+        /// <summary>
+        /// The SelectTemplate
+        /// </summary>
+        /// <param name="item">The item<see cref="object"/></param>
+        /// <param name="container">The container<see cref="DependencyObject"/></param>
+        /// <returns>The <see cref="DataTemplate"/></returns>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (_defaultStringTemplate == null && _defaultNotificationTemplate == null)
             {
-                GetTemplatesFromResources((FrameworkElement)container);                            
-            }           
+                GetTemplatesFromResources((FrameworkElement)container);
+            }
 
             if (item is string)
             {
                 return _defaultStringTemplate;
             }
-            if (item is NotificationContent)
+            if (item is ToastContent)
             {
                 return _defaultNotificationTemplate;
             }
 
             return base.SelectTemplate(item, container);
-
         }
     }
 }

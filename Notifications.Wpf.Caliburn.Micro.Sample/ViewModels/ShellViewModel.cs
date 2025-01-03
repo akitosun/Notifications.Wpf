@@ -7,9 +7,9 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample.ViewModels
 {
     public class ShellViewModel : PropertyChangedBase
     {
-        private readonly INotificationManager _manager;
+        private readonly IToastNotificationService _manager;
 
-        public ShellViewModel(INotificationManager manager)
+        public ShellViewModel(IToastNotificationService manager)
         {
             _manager = manager;
         }
@@ -27,7 +27,7 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample.ViewModels
 
         public void ShowInWindow()
         {
-            _manager.Show(new NotificationContent { Title ="Message", Message = "Message in window"}, areaName: "WindowArea");
+            _manager.Show(new ToastContent { Title ="Message", Message = "Message in window"}, areaName: "WindowArea");
         }
     }
 }

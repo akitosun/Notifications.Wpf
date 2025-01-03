@@ -6,12 +6,12 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample.ViewModels
 {
     public class NotificationViewModel : PropertyChangedBase
     {
-        private readonly INotificationManager _manager;
+        private readonly IToastNotificationService _manager;
 
         public string Title { get; set; }
         public string Message { get; set; }
 
-        public NotificationViewModel(INotificationManager manager)
+        public NotificationViewModel(IToastNotificationService manager)
         {
             _manager = manager;
         }
@@ -19,13 +19,13 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample.ViewModels
         public async void Ok()
         {
             await Task.Delay(500);
-            _manager.Show(new NotificationContent { Title ="Success!", Message = "Ok button was clicked.", Type = NotificationType.Success});
+            _manager.Show(new ToastContent { Title ="Success!", Message = "Ok button was clicked.", Type = ToastNotificationType.Success});
         }
 
         public async void Cancel()
         {
             await Task.Delay(500);
-            _manager.Show(new NotificationContent { Title = "Error!",  Message = "Cancel button was clicked!", Type = NotificationType.Error});
+            _manager.Show(new ToastContent { Title = "Error!",  Message = "Cancel button was clicked!", Type = ToastNotificationType.Error});
         }
     }
 }

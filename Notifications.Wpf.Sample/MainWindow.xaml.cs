@@ -9,7 +9,7 @@ namespace Notifications.Wpf.Sample
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly NotificationManager _notificationManager = new NotificationManager();
+        private readonly ToastNotificationService _notificationManager = new ToastNotificationService();
         private readonly Random _random = new Random();
 
         public MainWindow()
@@ -23,23 +23,23 @@ namespace Notifications.Wpf.Sample
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var content = new NotificationContent
+            var content = new ToastContent
             {
                 Title = "Sample notification",
                 Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                Type = (NotificationType) _random.Next(0, 4)
+                Type = (ToastNotificationType) _random.Next(0, 4)
             };
             _notificationManager.Show(content);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var content = new NotificationContent {Title = "Notification in window", Message = "Click me!"};
-            var clickContent = new NotificationContent
+            var content = new ToastContent {Title = "ToastControl in window", Message = "Click me!"};
+            var clickContent = new ToastContent
             {
                 Title = "Clicked!",
                 Message = "Window notification was clicked!",
-                Type = NotificationType.Success
+                Type = ToastNotificationType.Success
             };
             _notificationManager.Show(content, "WindowArea", onClick: () => _notificationManager.Show(clickContent));
         }

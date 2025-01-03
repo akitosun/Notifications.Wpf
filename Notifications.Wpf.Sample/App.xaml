@@ -10,7 +10,7 @@
 
         <sample:CustomTemplateSelector x:Key="CustomTemplateSelector" />
 
-        <Style TargetType="controls:Notification">
+        <Style TargetType="controls:ToastControl">
             <Setter Property="ContentTemplateSelector" Value="{StaticResource CustomTemplateSelector}" />
             <Style.Resources>
                 <DataTemplate DataType="{x:Type system:String}" x:Key="PinkStringTemplate">

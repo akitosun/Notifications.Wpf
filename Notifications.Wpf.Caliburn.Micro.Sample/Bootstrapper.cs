@@ -22,7 +22,7 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample
             base.Configure();
 
             _container.Singleton<IWindowManager, WindowManager>();
-            _container.Singleton<INotificationManager, NotificationManager>();
+            _container.Singleton<IToastNotificationService, ToastNotificationService>();
             _container.Singleton<ShellViewModel>();
         }
 
@@ -48,7 +48,7 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             var timer = new Timer {Interval = 12000};
-            timer.Elapsed += (o, args) => IoC.Get<INotificationManager>().Show("String from Bootstrapper!");
+            timer.Elapsed += (o, args) => IoC.Get<IToastNotificationService>().Show("String from Bootstrapper!");
             timer.Start();
         }
     }
