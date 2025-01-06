@@ -1,6 +1,7 @@
 ﻿namespace Notifications.Wpf
 {
     using System;
+    using System.Windows;
 
     /// <summary>
     /// Defines the <see cref="ToastContent" />
@@ -35,6 +36,6 @@
         /// <summary>
         /// Gets or sets the DataTemplateKey
         /// </summary>
-        public string DataTemplateKey { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DataTemplate DataTemplate { get; set; }
     }
 }

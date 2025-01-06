@@ -8,11 +8,8 @@
     /// </summary>
     public class NotificationTemplateSelector : DataTemplateSelector
     {
-        /// <summary>
-        /// Defines the _defaultStringTemplate
-        /// </summary>
-        private DataTemplate _defaultStringTemplate;
-
+        
+        private DataTemplate _customDataTemplate;
         /// <summary>
         /// Defines the _defaultNotificationTemplate
         /// </summary>
@@ -23,9 +20,7 @@
         /// </summary>
         /// <param name="container">The container<see cref="FrameworkElement"/></param>
         private void GetTemplatesFromResources(FrameworkElement container)
-        {
-            _defaultStringTemplate =
-                    container?.FindResource("DefaultStringTemplate") as DataTemplate;
+        {            
             _defaultNotificationTemplate =
                     container?.FindResource("DefaultNotificationTemplate") as DataTemplate;
         }
@@ -38,18 +33,17 @@
         /// <returns>The <see cref="DataTemplate"/></returns>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (_defaultStringTemplate == null && _defaultNotificationTemplate == null)
+            if (_defaultNotificationTemplate == null)
             {
                 GetTemplatesFromResources((FrameworkElement)container);
             }
-
-            if (item is string)
+            if (item is IToastContent toastContent)
             {
-                return _defaultStringTemplate;
-            }
-            if (item is ToastContent)
-            {
-                return _defaultNotificationTemplate;
+                if (toastContent.DataTemplate == null)
+                {
+                    return _defaultNotificationTemplate;
+                }
+                return toastContent.DataTemplate;
             }
 
             return base.SelectTemplate(item, container);

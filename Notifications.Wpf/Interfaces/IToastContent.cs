@@ -1,6 +1,7 @@
 ﻿namespace Notifications.Wpf
 {
     using System;
+    using System.Windows;
 
     /// <summary>
     /// Defines the <see cref="IToastContent" />
@@ -23,9 +24,9 @@
         string ContainerName { get; set; }
 
         /// <summary>
-        /// Gets or sets the DataTemplateKey
+        /// Gets or sets the DataTemplate
         /// </summary>
-        string DataTemplateKey { get; set; }
+        DataTemplate DataTemplate { get; set; }
 
         /// <summary>
         /// Gets or sets the Type
