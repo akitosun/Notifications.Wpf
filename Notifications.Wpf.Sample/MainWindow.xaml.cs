@@ -39,9 +39,10 @@ namespace Notifications.Wpf.Sample
             {
                 Title = "Clicked!",
                 Message = "Window notification was clicked!",
-                Type = ToastNotificationType.Success
+                Type = ToastNotificationType.Success,
+                ContainerName = "WindowArea"
             };
-            _notificationManager.Show(content, "WindowArea", onClick: () => _notificationManager.Show(clickContent));
+            _notificationManager.Show(content, onClick: () => _notificationManager.Show(clickContent));
         }
     }
 }

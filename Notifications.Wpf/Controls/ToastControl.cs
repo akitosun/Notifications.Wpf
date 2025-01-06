@@ -85,13 +85,21 @@
 
         }
 
+        private async Task HandleCloseButtonClickAsync(Button button)
+        {
+            if (button == null) return;
+
+            button.Click -= OnCloseButtonOnClick; // Unsubscribe from the event
+            await Close(); // Await the Close method
+        }
+
         private void OnCloseButtonOnClick(object sender, RoutedEventArgs args)
         {
             var button = sender as Button;
             if (button == null) return;
 
-            button.Click -= OnCloseButtonOnClick;
-            Close();
+            // Call the async method without causing async void
+            _ = HandleCloseButtonClickAsync(button);
         }
 
         public async Task Close()

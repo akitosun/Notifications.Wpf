@@ -84,12 +84,11 @@
         /// <summary>
         /// The Show
         /// </summary>
-        /// <param name="content">The content<see cref="object"/></param>
-        /// <param name="expirationTime">The expirationTime<see cref="TimeSpan"/></param>
+        /// <param name="content">The content<see cref="ToastContent"/></param>
         /// <param name="onClick">The onClick<see cref="Action"/></param>
         /// <param name="onClose">The onClose<see cref="Action"/></param>
         /// <returns>The <see cref="Task"/></returns>
-        public async Task Show(object content, TimeSpan expirationTime, Action onClick, Action onClose)
+        public async Task Show(IToastContent content, Action onClick, Action onClose)
         {
             var toastControl = new ToastControl
             {
@@ -129,12 +128,12 @@
                 }
             }
 
-            if (expirationTime == TimeSpan.MaxValue)
+            if (content.ExpirationTime == TimeSpan.MaxValue)
             {
                 return;
             }
-            await Task.Delay(expirationTime);
-            toastControl.Close().RunSynchronously();
+            await Task.Delay(content.ExpirationTime);
+            await toastControl.Close();
         }
 
         /// <summary>

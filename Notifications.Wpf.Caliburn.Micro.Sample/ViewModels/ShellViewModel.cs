@@ -19,15 +19,16 @@ namespace Notifications.Wpf.Caliburn.Micro.Sample.ViewModels
             var content = new NotificationViewModel(_manager)
             {
                 Title = "Custom notification.",
-                Message = "Click on buttons!"
+                Message = "Click on buttons!",
+                
             };
 
-            _manager.Show(content, expirationTime: TimeSpan.FromSeconds(30));          
+            _manager.Show(content);          
         }
 
         public void ShowInWindow()
         {
-            _manager.Show(new ToastContent { Title ="Message", Message = "Message in window"}, areaName: "WindowArea");
+            _manager.Show(new ToastContent { Title ="Message", Message = "Message in window",ContainerName = "WindowArea" });
         }
     }
 }

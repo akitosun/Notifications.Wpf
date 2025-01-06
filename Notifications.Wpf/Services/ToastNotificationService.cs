@@ -24,9 +24,9 @@
         private static readonly List<ToastContainerControl> Areas = new List<ToastContainerControl>();
 
         /// <summary>
-        /// Defines the _window
+        /// Defines the Window
         /// </summary>
-        private static NotificationsOverlayWindow _window;
+        private static readonly NotificationsOverlayWindow Window = new NotificationsOverlayWindow();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToastNotificationService"/> class.
@@ -45,41 +45,34 @@
         /// <summary>
         /// The Show
         /// </summary>
-        /// <param name="content">The content<see cref="object"/></param>
-        /// <param name="areaName">The areaName<see cref="string"/></param>
-        /// <param name="expirationTime">The expirationTime<see cref="TimeSpan?"/></param>
+        /// <param name="content">The content<see cref="ToastContent"/></param>
         /// <param name="onClick">The onClick<see cref="Action"/></param>
         /// <param name="onClose">The onClose<see cref="Action"/></param>
-        public void Show(object content, string areaName = "", TimeSpan? expirationTime = null, Action onClick = null,
+        public void Show(IToastContent content, Action onClick = null,
             Action onClose = null)
         {
             if (!_dispatcher.CheckAccess())
             {
                 _dispatcher.BeginInvoke(
-                    new Action(() => Show(content, areaName, expirationTime, onClick, onClose)));
+                    new Action(() => Show(content, onClick, onClose)));
                 return;
             }
 
-            if (expirationTime == null) expirationTime = TimeSpan.FromSeconds(5);
-
-            if (areaName == string.Empty && _window == null)
+            if (string.IsNullOrEmpty(content.ContainerName))
             {
                 var workArea = SystemParameters.WorkArea;
 
-                _window = new NotificationsOverlayWindow
-                {
-                    Left = workArea.Left,
-                    Top = workArea.Top,
-                    Width = workArea.Width,
-                    Height = workArea.Height
-                };
+                Window.Left = workArea.Left;
+                Window.Top = workArea.Top;
+                Window.Width = workArea.Width;
+                Window.Height = workArea.Height;
 
-                _window.Show();
+                Window.Show();
             }
 
-            foreach (var area in Areas.Where(a => a.Name == areaName))
+            foreach (var area in Areas.Where(a => a.Name == content.ContainerName))
             {
-                area.Show(content, (TimeSpan)expirationTime, onClick, onClose);
+                area.Show(content, onClick, onClose).RunSynchronously();
             }
         }
 

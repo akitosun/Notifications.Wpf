@@ -58,11 +58,12 @@
   <ItemGroup>
     <Compile Include="Controls\ToastContainerControl.cs" />
     <Compile Include="Controls\ToastControl.cs" />
+    <Compile Include="Interfaces\IToastContent.cs" />
     <Compile Include="ToastNotificationPosition.cs" />
     <Compile Include="Controls\ReversibleStackPanel.cs" />
-    <Compile Include="IToastNotificationService.cs" />
+    <Compile Include="Interfaces\IToastNotificationService.cs" />
     <Compile Include="ToastContent.cs" />
-    <Compile Include="ToastNotificationService.cs" />
+    <Compile Include="Services\ToastNotificationService.cs" />
     <Compile Include="NotificationTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationsOverlayWindow.xaml.cs">
@@ -85,6 +86,7 @@
     <None Include="Notifications.Wpf.nuspec" />
     <None Include="pack.bat" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

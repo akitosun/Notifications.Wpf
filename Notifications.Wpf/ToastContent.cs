@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines the <see cref="ToastContent" />
     /// </summary>
-    public class ToastContent
+    public class ToastContent : IToastContent
     {
         /// <summary>
         /// Gets or sets the Title
@@ -31,5 +31,10 @@
         /// Gets or sets the ExpirationTime
         /// </summary>
         public TimeSpan ExpirationTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DataTemplateKey
+        /// </summary>
+        public string DataTemplateKey { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
